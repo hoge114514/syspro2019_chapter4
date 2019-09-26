@@ -13,7 +13,6 @@ def setservo(angle):
 
 
     duty = (1.44 + angle * (0.95/90)) / 20 * 100
-    print(duty)
     servo.ChangeDutyCycle(duty)
     
 while(1):
