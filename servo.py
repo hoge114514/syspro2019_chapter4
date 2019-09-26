@@ -1,25 +1,22 @@
 import time
+import sys
 import RPi.GPIO as GPIO
 
+
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(2, GPIO.OUT)
 servo = GPIO.PWM(2, 50)
 servo.start(0.0)
 
-bottom = 2.5
-middle = 7.2
-top = 12.0
-
-for i in range(5):
-	servo.ChangeDutyCycle(bottom)
-	time.sleep(1.0)
-
-	servo.ChangeDutyCycle(middle)
-	time.sleep(1.0)
-
-	servo.ChangeDutyCycle(top)
-	time.sleep(1.0)
+def setservo(angle):
 
 
-
+    duty = (1.44 + angle * (0.95/90)) / 20 * 100
+    print(duty)
+    servo.ChangeDutyCycle(duty)
+    
+while(1):
+    angle = input()
+    setservo(angle)
 
